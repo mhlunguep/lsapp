@@ -9,10 +9,15 @@ use App\Post;
 class PostsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['index', 'show']]); //Authnicate Create, Update and delete 
+    }
+    
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->get();
